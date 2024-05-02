@@ -19,4 +19,9 @@
       state: started
       enabled: yes
 
+  - name: Copy files from Homework1 to remote host 
+    copy:
+      src: "./"
+      dest: /root/
+
 # run the command: ansible-playbook main.yml -i my_hosts

@@ -29,5 +29,3 @@
       state: present
 
 # run the command: ansible-playbook groups_users.yml -i my_hosts
-# Copy Homework1 folder to a remote machine:
-# scp -r /root/ansible-homework-batch5/Homework1/ root@167.172.251.184:/root/
