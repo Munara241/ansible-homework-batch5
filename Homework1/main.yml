@@ -19,4 +19,4 @@
       state: started
       enabled: yes
 
-# run the command: ansible-playbook main.yml -i hosts
+# run the command: ansible-playbook main.yml -i my_hosts
