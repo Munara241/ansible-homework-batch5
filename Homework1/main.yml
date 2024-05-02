@@ -1,0 +1,22 @@
+- hosts: ubuntu22 
+  become: true
+  tasks:
+  - name: Update and upgrade apt packages
+    apt:
+      upgrade: yes
+      update_cache: yes
+  
+  - name: Install Apache, Git and Tree
+    apt:
+      name:
+        - apache2
+        - git
+        - tree
+      state: present
+  - name: Start service Apache and make it permanent
+    service: 
+      name: apache2
+      state: started
+      enabled: yes
+
+# run the command: ansible-playbook main.yml -i hosts
