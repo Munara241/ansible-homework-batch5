@@ -1,0 +1,65 @@
+# Deploy WordPress on Centos 7
+- hosts: centos7
+  become: yes
+  tasks:
+    - name: Install required packages
+      yum:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - httpd
+        - wget
+        - unzip
+        - epel-release
+        - mysql
+        - https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+
+    - name: Enable Remi PHP 7.4
+      shell: yum-config-manager --enable remi-php74
+
+    - name: Install PHP and PHP mysql
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - php
+        - php-mysql
+
+    - name: Download WordPress
+      get_url:
+        url: https://wordpress.org/latest.tar.gz
+        dest: /tmp/latest.tar.gz
+
+    - name: Extract WordPress
+      unarchive:
+        src: /tmp/latest.tar.gz
+        dest: /var/www/html
+        remote_src: yes
+
+    - name: Set ownership for WordPress files
+      file:
+        path: /var/www/html
+        state: directory
+        owner: apache
+        group: apache
+        recurse: yes
+
+    - name: Install MariaDB and start the service
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - mariadb
+        - mariadb-server
+      
+    - name: Restart and enable Apache
+      systemd:
+        name: httpd
+        state: restarted
+        enabled: yes
+
+    - name: Start and enable MariaDB
+      systemd:
+        name: mariadb
+        state: started
+        enabled: yes
