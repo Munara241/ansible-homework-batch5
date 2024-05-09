@@ -1,1 +1,5 @@
 # defaults file for roles
+url: https://wordpress.org/latest.tar.gz
+archive_file: /tmp/wordpress.tar.gz
+user_og: apache
+apache: httpd

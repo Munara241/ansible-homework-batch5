@@ -1,1 +1,2 @@
-# vars file for roles
+# defaults file for roles
+package: httpd

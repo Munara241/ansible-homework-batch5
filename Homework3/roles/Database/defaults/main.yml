@@ -1,1 +1,4 @@
 # defaults file for roles
+db_name: database1
+db_user: munara
+passwrd: kaizen123
